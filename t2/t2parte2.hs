@@ -15,4 +15,4 @@ bin2dec [] = undefined
 bin2dec bits = auxBin2Dec bits ((length bits)-1)
 
 auxBin2Dec :: [Int] -> Int -> Int
-auxBin2Dec x = 
+auxBin2Dec (x,xs) = exp x + auxBin2Dec (head xs) (tail xs)
