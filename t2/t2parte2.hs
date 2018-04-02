@@ -20,3 +20,8 @@ auxBin2Dec (x:xs) y = x * (2^y) + auxBin2Dec xs (y-1)
 --4
 bin2dec' :: [Int] -> Int
 bin2dec' n = sum (zipWith (*) (map (\x -> 2^x)  ([(length n)-1,(length n)-2..0])) n)
+
+--5
+dec2bin :: Int -> [Int]
+dec2bin 0 = []
+dec2bin x = x `rem` 2 : dec2bin (x `quot` 2)
