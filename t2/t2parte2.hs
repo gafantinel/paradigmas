@@ -25,3 +25,10 @@ bin2dec' n = sum (zipWith (*) (map (\x -> 2^x)  ([(length n)-1,(length n)-2..0])
 dec2bin :: Int -> [Int]
 dec2bin 0 = []
 dec2bin x = x `rem` 2 : dec2bin (x `quot` 2)
+
+--6
+isHex :: String -> Bool
+isHex "" = True
+isHex x = 
+  if ((head x >= 'A' && head x <= 'F') || (head x >= '0' && head x <= '9')) then isHex (tail x)
+  else False
