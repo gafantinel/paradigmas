@@ -15,4 +15,8 @@ bin2dec [] = undefined
 bin2dec bits = auxBin2Dec bits ((length bits)-1)
 
 auxBin2Dec :: [Int] -> Int -> Int
-auxBin2Dec (x:xs) y = x * (2^y) + auxBin2Dec xs (y-1) 
+auxBin2Dec (x:xs) y = x * (2^y) + auxBin2Dec xs (y-1)
+
+--4
+bin2dec' :: [Int] -> Int
+bin2dec' n = sum (zipWith (*) (map (\x -> 2^x)  ([(length n)-1,(length n)-2..0])) n)
