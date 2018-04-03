@@ -56,7 +56,8 @@ countChar x str = length (filter (\n -> n==x) str)
 
 --5
 freqs :: String -> [Float]
-freqs x = map (\n -> percent (countChar n x) (countValids x)) ['a'..'z']
+freqs x = [percent (countChar n x) (countValids x) | n <- ['a'..'z']]
 
 --6
 positions :: Float -> [Float] -> [Int]
+positions n lista = fst (unzip (filter ((==n).snd) (zip [0..] lista)))
