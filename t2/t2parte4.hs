@@ -54,3 +54,9 @@ countValids x = length (filter (/= ' ') x)
 countChar :: Char -> String -> Int
 countChar x str = length (filter (\n -> n==x) str)
 
+--5
+freqs :: String -> [Float]
+freqs x = map (\n -> percent (countChar n x) (countValids x)) ['a'..'z']
+
+--6
+positions :: Float -> [Float] -> [Int]
