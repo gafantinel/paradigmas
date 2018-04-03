@@ -32,3 +32,11 @@ crack cs = encodeStr cs (-factor)
            where factor = head (positions (minimum chitab) chitab)
                  chitab = [ chi2 (rotate n table' ) table | n <- [0..25] ]
                  table' = freqs cs
+
+--1
+shiftChar :: Char -> Int -> Char
+shiftChar ' ' x = ' '
+shiftChar c x
+    | isUpper c = c
+    | ((encodeChar c) + x) > 25 = decodeChar ((encodeChar c) + x - 26)
+    | otherwise = decodeChar ((encodeChar c) + x)
