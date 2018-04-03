@@ -60,4 +60,4 @@ freqs x = [percent (countChar n x) (countValids x) | n <- ['a'..'z']]
 
 --6
 positions :: Float -> [Float] -> [Int]
-positions n lista = fst (unzip (filter ((==n).snd) (zip [0..] lista)))
+positions x lista = fst (unzip (filter (( ==x).snd) (zip [0..] lista)))
