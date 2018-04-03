@@ -40,3 +40,8 @@ shiftChar c x
     | isUpper c = c
     | ((encodeChar c) + x) > 25 = decodeChar ((encodeChar c) + x - 26)
     | otherwise = decodeChar ((encodeChar c) + x)
+
+--2
+encodeStr :: String -> Int -> String
+encodeStr "" n = ""
+encodeStr (x:xs) n = shiftChar x n : encodeStr xs n
