@@ -49,3 +49,8 @@ encodeStr (x:xs) n = shiftChar x n : encodeStr xs n
 --3
 countValids :: String -> Int
 countValids x = length (filter (/= ' ') x)
+
+--4
+countChar :: Char -> String -> Int
+countChar x str = length (filter (\n -> n==x) str)
+
