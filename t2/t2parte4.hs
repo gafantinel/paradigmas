@@ -45,3 +45,7 @@ shiftChar c x
 encodeStr :: String -> Int -> String
 encodeStr "" n = ""
 encodeStr (x:xs) n = shiftChar x n : encodeStr xs n
+
+--3
+countValids :: String -> Int
+countValids x = length (filter (/= ' ') x)
