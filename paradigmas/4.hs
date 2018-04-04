@@ -12,4 +12,3 @@ contido x str =
 
 --3
 
---testeaidasiuhdiuha
