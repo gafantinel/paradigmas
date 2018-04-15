@@ -26,5 +26,10 @@ potN0(N,L):-
 potN0(_,[]).
 
 % 5
-zipmult(L1,L2,L3):-
-    
+zipmult([],[],[]).
+zipmult(L1,L2,L3) :-
+    L1 = [H1 | T1],
+    L2 = [H2 | T2],
+    H3 is H1 * H2,
+    L3 = [H3 | T3],
+    zipmult(T1,T2,T3).
