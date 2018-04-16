@@ -35,16 +35,9 @@ zipmult(L1,L2,L3) :-
     zipmult(T1,T2,T3).
 
 % 6
-% arrumar xxxxxxxxxxxxxxxxxxxxx
 potencias(N,L):-
-    potN0(N,L),
-    inverte(L,R).
-
-inverte([],[]). 
-inverte(L,R):-
-    L = [H|T],  
-    append(T2,[H],R),
-	inverte(T,T2).
+    potN0(N,H),
+    reverse(H,L).
 
 % 7
 positivos([],[]).
