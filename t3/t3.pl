@@ -44,5 +44,21 @@ positivos([],[]).
 positivos(L1,L2):-
     L1 = [H1|T1],
     L2 = [H2|T2],
-    append([H2],[H1],L2),
+    H1 > 0,
+    H2 is H1,
     positivos(T1,T2).
+
+positivos(L1,L2):-
+    L1 = [_|T1],
+    positivos(T1,L2).
+
+% 8
+mesmaPosicao(A,L1,L2):-
+    nth0(X,L1,A),
+    nth0(Y,L2,A),
+    X==Y.
+
+% 9
+comissao(NP,LP,C):-
+    
+   
