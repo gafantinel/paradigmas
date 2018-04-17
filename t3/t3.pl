@@ -59,7 +59,7 @@ mesmaPosicao(A,L1,L2):-
     X==Y.
 
 % 9
-comissao(NP,LP,C):-
+% comissao(NP,LP,C).
     
    
 % 10
