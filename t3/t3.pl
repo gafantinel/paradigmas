@@ -65,9 +65,9 @@ comissao(NP,LP,C):-
 % 10
 azulejos(0,0).
 azulejos(NA, NQ):-
-	X is sqrt(NA),
+    X is sqrt(NA),
     Y is floor(X),
     Z is NA - Y*Y,
     azulejos(Z,T),
-	NQ is T+1.
+    NQ is T+1.
 
