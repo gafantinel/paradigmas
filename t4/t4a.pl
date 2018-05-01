@@ -60,9 +60,9 @@ cd(X):-
 Questao 11. Qual das seguintes alternativas poderia
 ser a ordem das musicas no CD, da primeira
 para a setima faixa?
-(A) T, W, V, S, Y, X, Z - cd([t,w,v,s,y,x,z])
-(B) V, Y, T, S, W, Z, X - cd([v,y,t,s,w,z,x])
-(C) X, Y, W, S, T, Z, S - cd([x,y,w,s,t,z,s])
-(D) Y, T, W, S, X, Z, V - cd([y,t,w,s,x,z,v]) <- Correta
-(E) Z, T, X, W, V, Y, S - cd([z,t,x,w,v,y,s])
+(A) T, W, V, S, Y, X, Z - cd([t,w,v,s,y,x,z]).
+(B) V, Y, T, S, W, Z, X - cd([v,y,t,s,w,z,x]).
+(C) X, Y, W, S, T, Z, S - cd([x,y,w,s,t,z,s]).
+(D) Y, T, W, S, X, Z, V - cd([y,t,w,s,x,z,v]). <- Correta
+(E) Z, T, X, W, V, Y, S - cd([z,t,x,w,v,y,s]).
 */
