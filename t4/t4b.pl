@@ -24,7 +24,9 @@ analistasenior(_).
 analistajunior(_).
 
 regra3(X):- X = [_,_,_,alice].
+
 regra4(X):- analistasenior(X).
+
 regra5(X):-
     nth1(Ibia,X,bia),
     nth1(Iclara,X,clara),
