@@ -49,5 +49,5 @@ falsa?
 (B) Bia e alocada no terceiro andar. - analistas([_,_,bia,_]).
 (C) Clara e alocada no primeiro andar. - analistas([clara,_,_,_]).
 (D) Clara e alocada no segundo andar. - analistas([_,clara,_,_]).
-(E) Clara e alocada no terceiro andar. - analistas([_,_,clara,_]). <- Correta
+(E) Clara e alocada no terceiro andar. - analistas([_,_,clara,_]). <- Falsa (opção correta)
 */
