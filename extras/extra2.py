@@ -45,7 +45,44 @@ def userName(x):
   return user.lower()
   
 #10-Escreva uma função encodeName :: String -> String que substitua vogais em uma string, conforme o esquema a seguir: a = 4, e = 3, i = 2, o = 1, u = 0.
+
+def encode1aux(x):
+  if x == 'a':
+    return '4'
+  elif x == 'e':
+    return '3'
+  elif x == 'i':
+    return '2'
+  elif x == 'o':
+    return '1'
+  elif x == 'u':
+    return '0'
+  else:
+    return x
+     
 def encodeName(x):
-  x = list(x)
-  map(lambda x: '4' if x is 'a', x)
-  return x
+  return "".join(list(map(encode1aux, x)))
+  
+#11-Escreva uma função betterEncodeName :: String -> String que substitua vogais em uma string, conforme este esquema: a = 4, e = 3, i = 1, o = 0, u = 00.
+def encode2aux(x):
+  if x == 'a':
+    return '4'
+  elif x == 'e':
+    return '3'
+  elif x == 'i':
+    return '1'
+  elif x == 'o':
+    return '0'
+  elif x == 'u':
+    return '00'
+  else:
+    return x
+
+def betterEncodeName(x):
+  return "".join(list(map(encode2aux, x)))
+  
+#12-Dada uma lista de strings, produzir outra lista com strings de 10 caracteres, usando o seguinte esquema: strings de entrada com mais de 10 caracteres são truncadas, strings com até 10 caracteres são completadas com '.' até ficarem com 10 caracteres.
+def func(x):
+  y = list(map(lambda x: x+"..........",x))
+  z = list(map(lambda y: y[:10], y))
+  return z
