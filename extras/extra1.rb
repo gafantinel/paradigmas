@@ -1,6 +1,4 @@
-#Extra: exercícios de Haskell feitos em Ruby
-#Aluno: Gustavo Arrua Fantinel
-#Obs: Contém gambiarras
+#Extra: T1 de Haskell feito em Ruby
 
 #1-Crie uma função isVowel :: Char -> Bool que verifique se um caracter é uma vogal ou não.
 def isVowel(x)
