@@ -1,80 +1,117 @@
 import javafx.application.Application;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
+import javafx.scene.control.*;
 import javafx.event.EventHandler;
-import javafx.scene.control.ToolBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class Programa extends Application {
     private int modoDeOperacao = 0;
-    private Line l;
+    private Grafo g;
+    private Line aresta;
+    private No noAuxiliar;
 
     @Override
     public void start(Stage stage){
 
+        g = new Grafo();
+
         BorderPane pane = new BorderPane();
 
-        Button btnQuadrado = new Button("Quadrado");
+        //Button btnQuadrado = new Button("Quadrado");
 
         Button btnCirculo = new Button("Círculo");
 
         Button btnAresta = new Button("Aresta");
 
-        Slider slider = new Slider();
-        slider.setMin(1);
-        slider.setMax(100);
-        slider.setValue(50);
-        slider.setShowTickLabels(true);
-        slider.setShowTickMarks(true);
+        Button btnInfo = new Button("Informações");
 
-        Label sliderLabel = new Label("Tamanho");
+        Slider raio = new Slider();
+        raio.setMin(1);
+        raio.setMax(100);
+        raio.setValue(50);
+        raio.setShowTickLabels(true);
+        raio.setShowTickMarks(true);
 
-        ToolBar toolbar = new ToolBar(btnQuadrado, btnCirculo, btnAresta, sliderLabel, slider);
+        Label sliderLabel = new Label("Raio");
 
+        Slider largura = new Slider();
+        largura.setMin(1);
+        largura.setMax(10);
+        largura.setValue(4);
+        largura.setShowTickLabels(true);
+        largura.setShowTickMarks(true);
 
-        btnQuadrado.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        Label larguraLabel = new Label("Largura");
+
+        ColorPicker colorPicker = new ColorPicker(Color.RED);
+
+        ToolBar toolbar = new ToolBar(btnCirculo, btnAresta, sliderLabel, raio, larguraLabel, largura, colorPicker, btnInfo);
+
+        /*btnQuadrado.setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 System.out.println("QUADRADO");
                 modoDeOperacao = 1;
             }
-        });
+        });*/
 
         btnCirculo.setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                System.out.println("CIRCULO");
-                modoDeOperacao = 2;
+                //System.out.println("CIRCULO");
+                modoDeOperacao = 1;
             }
         });
 
         btnAresta.setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                System.out.println("ARESTA");
-                modoDeOperacao = 3;
+                //System.out.println("ARESTA");
+                modoDeOperacao = 2;
+            }
+        });
+
+        btnInfo.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                alerta.setTitle("Informações");
+                alerta.setHeaderText(null);
+                alerta.setContentText("Nós: " + g.numNos() +  "\nArestas: " + g.numArestas() + "\nSobreposições: " + g.arestasSobrepostas());
+                alerta.showAndWait();
             }
         });
 
         pane.setOnMousePressed(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 if (modoDeOperacao == 1){
-                    Rectangle r = new Rectangle(event.getX(), event.getY(), slider.getValue(),slider.getValue());
-                    r.setFill(Color.RED);
-                    pane.getChildren().add(r);
-                } else if (modoDeOperacao == 2){
-                    Circle c = new Circle(event.getX(), event.getY(), slider.getValue()/2, Color.RED);
+                    Circle c = new Circle(event.getX(), event.getY(), raio.getValue()/2, colorPicker.getValue());
+                    g.novoCirculo(c);
                     pane.getChildren().add(c);
-                } else if (modoDeOperacao == 3){
-                    l = new Line(event.getX(), event.getY(), event.getX(), event.getY());
-                    pane.getChildren().add(l);
+                } else if (modoDeOperacao == 2){
+                    No temporario = g.pontoDentrodoNo(event.getX(), event.getY());
+                    if (temporario != null) {
+                        if (noAuxiliar == null) {
+                            aresta = new Line(temporario.retornaCirculo().getCenterX(), temporario.retornaCirculo().getCenterY(), event.getX(), event.getY());
+                            aresta.setStroke(colorPicker.getValue());
+                            aresta.setStrokeWidth(largura.getValue());
+                            pane.getChildren().add(aresta);
+                            noAuxiliar = temporario;
+                        } else if (noAuxiliar != temporario) {
+                            if (!g.temAresta(noAuxiliar, temporario)) {
+                                pane.getChildren().remove(aresta);
+                                g.novaAresta(new Aresta(noAuxiliar, temporario, aresta));
+                                aresta = new Line(noAuxiliar.retornaCirculo().getCenterX(), noAuxiliar.retornaCirculo().getCenterY(), temporario.retornaCirculo().getCenterX(), temporario.retornaCirculo().getCenterY());
+                                aresta.setStroke(colorPicker.getValue());
+                                aresta.setStrokeWidth(largura.getValue());
+                                pane.getChildren().add(aresta);
+                                aresta = null;
+                                noAuxiliar = null;
+                            }
+                        }
+                    }
                 }
             }
 
@@ -82,9 +119,14 @@ public class Programa extends Application {
 
         pane.setOnMouseDragged(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                if (modoDeOperacao == 3){
-                    l.setEndX(event.getX());
-                    l.setEndY(event.getY());
+                try{
+                    if (modoDeOperacao == 2){
+
+                        aresta.setEndX(event.getX());
+                        aresta.setEndY(event.getY());
+                    }
+                } catch (NullPointerException ex){
+                    return;
                 }
             }
         });
