@@ -1,6 +1,7 @@
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import java.awt.geom.Line2D;
 
 import java.util.ArrayList;
 
@@ -68,21 +69,16 @@ public class Grafo {
         return false;
     }
 
-
-
-    public int arestasSobrepostas() {
-        for (int i = 0; i < nos.size(); i++) {
-            for (int j = 0; j < nos.get(i).retornaListaDeArestas().size(); j++) {
-                for (int a = 0; a < nos.size(); a++)
-                    for (int b = 0; b < nos.get(a).retornaListaDeArestas().size(); b++) {
-                        Aresta a1 = nos.get(i).retornaListaDeArestas().get(j);
-                        Aresta a2 = nos.get(a).retornaListaDeArestas().get(b);
-                        System.out.println("ué");
-                        if (a1.noInicio() != a2.noInicio() && a1.noInicio() != a2.noFim() && a1.noFim() != a2.noInicio() && a1.noFim() != a2.noFim() && a1.retornaAresta().getBoundsInParent().intersects(a2.retornaAresta().getBoundsInParent())) {
-                            contSobrepostas++;
-                            System.out.println("SOBREPOSTAAAAAAA");
-                        }
-                    }
+    public int arestasSobrepostas () {
+        for (Aresta aresta1 : arestas) {
+            for (Aresta aresta2 : arestas) {
+                if ((aresta1.noInicio().equals(aresta2.noInicio())) || (aresta1.noFim().equals(aresta2.noFim())) || (aresta1.noInicio().equals(aresta2.noFim())) || (aresta1.noFim().equals(aresta2.noInicio())))
+                    continue;
+                if (aresta1.equals(aresta2))
+                    continue;
+                if (Line2D.linesIntersect(aresta1.retornaAresta().getStartX(), aresta1.retornaAresta().getStartY(), aresta1.retornaAresta().getEndX(), aresta1.retornaAresta().getEndY(), aresta2.retornaAresta().getStartX(), aresta2.retornaAresta().getStartY(), aresta2.retornaAresta().getEndX(), aresta2.retornaAresta().getEndY())) {
+                    contSobrepostas++;
+                }
             }
         }
         return contSobrepostas/2;
