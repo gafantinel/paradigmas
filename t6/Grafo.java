@@ -41,6 +41,7 @@ public class Grafo {
         return contArestas;
     }
 
+    // Retorna o número de sobreposições
     public int arestasSobrepostas () {
         contSobrepostas = 0;
         for (Aresta aresta1 : arestas) {
@@ -61,12 +62,12 @@ public class Grafo {
         return nos;
     }
 
-
-    public boolean mouseDentroCirculo(double x, double y, Circle circulo){
+    // Auxiliar da buscaNo
+    public boolean dentroCirculo(double x, double y, Circle circulo){
 
         double distance = Math.hypot(x-circulo.getCenterX(), y-circulo.getCenterY());
 
-        if (distance <= circulo.getRadius() + 20){
+        if (distance <= circulo.getRadius() + 10){
             return true;
         } else {
             return false;
@@ -75,7 +76,7 @@ public class Grafo {
 
     public No buscaNo(double x, double y){
         for (No aux: this.nos){
-            if (mouseDentroCirculo(x, y, aux.retornaCirculo())){
+            if (dentroCirculo(x, y, aux.retornaCirculo())){
                 return aux;
             }
         }
