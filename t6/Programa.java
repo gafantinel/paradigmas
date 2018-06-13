@@ -21,6 +21,7 @@ public class Programa extends Application {
 
     public BorderPane raiz = new BorderPane();
 
+    // Cria novo jogo, também usada para mudar de nível
     public void novoJogo(){
         pane.getChildren().clear();
         g.reset();
@@ -86,6 +87,8 @@ public class Programa extends Application {
 
         ToolBar toolbar = new ToolBar(btnNovoGrafo, btnProximoNivel, btnVerificar, btnInfo);
 
+        // Funcionamento dos botões
+        
         btnNovoGrafo.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -138,7 +141,9 @@ public class Programa extends Application {
                 alerta.showAndWait();
             }
         });
-
+        
+        // Função para arrastar os círculos
+        
         pane.setOnMouseDragged(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
