@@ -3,6 +3,7 @@
 ### AKA Minecraft para computadores de 2004
 
 Um estudo mais aprofundado do JavaFX, baseado na prática feita em sala de aula.
+PS: Ligue o som!
 
 ### Para Compilar:
 1. Baixe os arquivos e coloque-os na mesma pasta.
