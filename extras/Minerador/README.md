@@ -1,5 +1,4 @@
 # Minerador
-## AKA Bootleg Minecraft
 ### AKA Minecraft para computadores de 2004
 
 Um estudo mais aprofundado do JavaFX, baseado na prática feita em sala de aula.
